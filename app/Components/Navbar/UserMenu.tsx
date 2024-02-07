@@ -4,12 +4,14 @@ import { AiOutlineMenu } from "react-icons/ai";
 import Avatr from "../Avtar";
 import { useCallback, useState } from "react";
 import MenuItem from "./MenuItem";
+import useRegisterModal from "@/app/hooks/UseRegisterModal";
 
 const UserMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value);
   }, []);
+  const registermodal=useRegisterModal();
   return (
     <div className="relative ">
       <div className="flex flex-row items-center gap-3">
@@ -30,11 +32,11 @@ const UserMenu = () => {
         </div>
       </div>
       {isOpen && (
-        <div className="absolute rounded-xl shadow-md w-[40vw] md:3/4 bg-white overflow-hidden right-0 top-12 text-sm">
+        <div className="absolute rounded-xl shadow-md w-[20vw] md:3/4 bg-white overflow-hidden right-0 top-12 text-sm">
           <div className="flex flex-col cursor-pointer">
             <>
               <MenuItem onClick={()=>{}} lable="Login"/>
-              <MenuItem onClick={()=>{}} lable="Sign up"/>
+              <MenuItem onClick={registermodal.onOpen} lable="Sign up"/>
             </>
           </div>
         </div>

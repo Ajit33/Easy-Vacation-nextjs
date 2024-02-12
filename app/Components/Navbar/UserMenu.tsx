@@ -5,13 +5,21 @@ import Avatr from "../Avtar";
 import { useCallback, useState } from "react";
 import MenuItem from "./MenuItem";
 import useRegisterModal from "@/app/hooks/UseRegisterModal";
-
-const UserMenu = () => {
+import useLoginModal from "@/app/hooks/useLoginModal";
+import { User } from "@prisma/client";
+import { signOut } from "next-auth/react";
+interface UserMenuProps{
+ currentUser?:User | null
+}
+const UserMenu:React.FC<UserMenuProps> = ({
+  currentUser
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value);
   }, []);
   const registermodal=useRegisterModal();
+  const loginmodal=useLoginModal();
   return (
     <div className="relative ">
       <div className="flex flex-row items-center gap-3">
@@ -34,13 +42,31 @@ const UserMenu = () => {
       {isOpen && (
         <div className="absolute rounded-xl shadow-md w-[20vw] md:3/4 bg-white overflow-hidden right-0 top-12 text-sm">
           <div className="flex flex-col cursor-pointer">
+            {
+              currentUser?(
+                  
             <>
-              <MenuItem onClick={()=>{}} lable="Login"/>
+            <MenuItem onClick={()=>{}} lable="My Trips"/>
+            <MenuItem onClick={()=>{}} lable="My Favorites"/>
+            <MenuItem onClick={()=>{}} lable="My Reservations"/>
+            <MenuItem onClick={()=>{}} lable="My Properties"/>
+            <MenuItem onClick={()=>{}} lable="Easy-Vaction my home"/>
+            <hr />
+            <MenuItem onClick={signOut} lable="Logout"/>
+
+            
+          </>
+              ):(
+            
+            <>
+              <MenuItem onClick={loginmodal.onOpen} lable="Login"/>
               <MenuItem onClick={registermodal.onOpen} lable="Sign up"/>
             </>
+              )}
           </div>
         </div>
       )}
+            
     </div>
   );
 };

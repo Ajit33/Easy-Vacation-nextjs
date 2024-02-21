@@ -20,7 +20,9 @@ import { useRouter } from 'next/navigation';
 const LoginModal = () => {
      const router=useRouter();
     const registermodal=useRegisterModal();
+
     const loginmodal=useLoginModal();
+
     const[isLoading,setIsLoading]=useState(false);
     const {
         register,
@@ -55,6 +57,13 @@ const LoginModal = () => {
          
         
     }
+ const toggle=useCallback(()=>{
+ loginmodal.onClose();
+ registermodal.onOpen();
+ console.log("button clicked")
+ },[loginmodal,registermodal])
+
+
 
   const bodyContent=(
     <div className='flex flex-col gap-4'>
@@ -99,10 +108,10 @@ const footerContent=(
       /> 
       <div className='text-neutral-500 text-center mt-4 font-light flex flex-row gap-2 items-center justify-center'>
         <div>
-            Already have an account ?
+            First Time in Easy-Vacation?
         </div>
-        <div className='text-neutral-700 hover:underline cursor-pointer'>
-            Log in
+        <div onClick={toggle} className='text-neutral-700 hover:underline cursor-pointer'>
+            Create an account
         </div>
         </div>  
     </div>

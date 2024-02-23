@@ -1,5 +1,5 @@
 'use client';
-import Container from "../Container/page";
+import Container from "../Container/container";
 import Categories from "./Categories";
 import Logo from "./Logo";
 import Search from "./Search";
@@ -13,7 +13,7 @@ const Navbar:React.FC<NavbarProps> = ({
 }) => {
 
   return (
-    <div className="fixed w-full bg-white z-10 shadow-sm">
+    <div className="fixed w-full  bg-white z-10 shadow-sm opacity ">
       <div className="py-4 border-b-[1px]">
         <Container>
           <div

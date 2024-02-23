@@ -1,7 +1,50 @@
-import Image from 'next/image'
+import Image from "next/image";
+import ClientOnly from "./Components/ClientOnly";
+import Container from "./Components/Container/container";
+import EmptyState from "./Components/EmptyState";
+import getListings from "./actions/getListing";
+import ListingCard from "./Components/listings/ListingCard";
+import getCurrentUser from "./actions/getCurrentUser";
 
-export default function Home() {
+export default async function Home() {
+  const listings = await getListings();
+
+
+  const currentUser=await getCurrentUser()
+
+  if (listings.length === 0) {
+    return (
+      <ClientOnly>
+        <EmptyState showReset />
+      </ClientOnly>
+    );
+  }
   return (
-   <div className='text-red-600 text-lg bg-green-100 flex item-center m-'>  air bnb</div>
-  )
+    <ClientOnly>
+      <Container>
+        <div
+          className="
+            pt-24
+            grid 
+            grid-cols-1 
+            sm:grid-cols-2 
+            md:grid-cols-3 
+            lg:grid-cols-4
+            xl:grid-cols-5
+            2xl:grid-cols-6
+            gap-8
+            mt-[40px]
+          "
+        >
+          {listings.map((listing: any) => (
+            <ListingCard
+            currentUser={currentUser}
+            key={listing.id}
+            data={listing}
+            />
+          ))}
+        </div>
+      </Container>
+    </ClientOnly>
+  );
 }

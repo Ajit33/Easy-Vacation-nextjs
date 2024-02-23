@@ -2,7 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Nunito } from 'next/font/google'
-import Navbar from './Components/Navbar/page'
+import Navbar from './Components/Navbar/Navbar'
 import ClientOnly from './Components/ClientOnly'
 import RegisterModal from './Components/modals/RegisterModal'
 import ToasterProvider from './providers/ToasterProvider'
@@ -38,8 +38,9 @@ export default  async function  RootLayout({
          <RegisterModal />
         <Navbar currentUser={currentUser} />
         </ClientOnly>
-        
+        <div className='pb-20 pt-28'>
         {children}
+        </div>
         </body>
     </html>
   )

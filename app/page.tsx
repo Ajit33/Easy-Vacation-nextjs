@@ -36,7 +36,7 @@ export default async function Home() {
             mt-[40px]
           "
         >
-          {listings.map((listing: any) => (
+          {listings.map((listing) => (
             <ListingCard
             currentUser={currentUser}
             key={listing.id}

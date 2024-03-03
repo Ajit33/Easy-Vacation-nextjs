@@ -6,7 +6,7 @@ import { categories } from "@/app/Components/Navbar/Categories";
 import ListingHead from "@/app/Components/listings/ListingHead";
 import ListingInfo from "@/app/Components/listings/ListingInfo";
 import useLoginModal from "@/app/hooks/useLoginModal";
-import { SafeListing, Safeuser } from "@/app/types";
+import { SafeListing, Safeuser, safeReservations } from "@/app/types";
 import { Reservation } from "@prisma/client";
 
 import { useRouter } from "next/navigation";
@@ -23,7 +23,7 @@ const initialDateRange = {
 };
 
 interface ListingClientProps {
-  reservations?: Reservation[];
+  reservations?: safeReservations[];
   listing: SafeListing & {
     user: Safeuser;
   };

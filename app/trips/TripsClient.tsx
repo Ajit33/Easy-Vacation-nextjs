@@ -29,7 +29,7 @@ reservation,currentUser
      const onCancel=useCallback((id:string)=>{
       setDeletingId(id);
 
-      axios.delete(`/api/reservation/${id}`)
+      axios.delete(`/api/reservations/${id}`)
       .then(()=>{
         toast.success("rservation cancel")
         router.refresh();
@@ -46,7 +46,7 @@ reservation,currentUser
         title="Trips"
         subtitle="Where you've been and where you've going "
         />
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gird-cols-5 2xl:grid-cols-6 gap-8">
+        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
         {reservation.map((reservation: any) => (
           <ListingCard
             key={reservation.id}

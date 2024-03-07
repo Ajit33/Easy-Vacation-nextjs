@@ -36,11 +36,12 @@ const RegisterModal = () => {
     });
     const onSubmit:SubmitHandler< FieldValues>=(data)=>{
         setIsLoading(true);
-        loginmodal.onOpen();
         axios.post('/api/register',data)
 
         .then(()=>{
+            toast.success('Sucessfully created !')
             registermodal.onClose();
+            loginmodal.onOpen();
         })
         .catch((error)=>{
             toast.error('Somthing Went Wrong ')

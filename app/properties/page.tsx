@@ -1,7 +1,6 @@
 import EmptyState from "../Components/EmptyState";
 import ClientOnly from "../Components/ClientOnly";
 import getCurrentUser from "../actions/getCurrentUser";
-import getReservation from "../actions/getReservation";
 import PropertiesClient from "./PropertiesClient";
 import getListings from "../actions/getListing";
 

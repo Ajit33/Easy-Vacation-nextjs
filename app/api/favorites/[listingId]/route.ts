@@ -13,13 +13,13 @@ export async function POST(
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
-    return NextResponse.error();
+    return NextResponse.json({ error: 'User not authenticated' }, { status: 401 });
   }
 
   const { listingId } = params;
 
   if (!listingId || typeof listingId !== 'string') {
-    throw new Error('Invalid ID');
+    return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
   }
 
   try {
@@ -27,18 +27,14 @@ export async function POST(
     favoriteIds.push(listingId);
 
     const user = await prisma.user.update({
-      where: {
-        id: currentUser.id
-      },
-      data: {
-        favoriteIds
-      }
+      where: { id: currentUser.id },
+      data: { favoriteIds }
     });
 
     return NextResponse.json(user);
-  } catch (error) {
-    console.error("Failed to add favorite:", error);
-    return NextResponse.error();
+  } catch (error: any) {
+    console.error("Failed to add favorite:", error.message, error);
+    return NextResponse.json({ error: 'Failed to update favorites' }, { status: 500 });
   }
 }
 
@@ -49,13 +45,13 @@ export async function DELETE(
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
-    return NextResponse.error();
+    return NextResponse.json({ error: 'User not authenticated' }, { status: 401 });
   }
 
   const { listingId } = params;
 
   if (!listingId || typeof listingId !== 'string') {
-    throw new Error('Invalid ID');
+    return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
   }
 
   try {
@@ -63,17 +59,14 @@ export async function DELETE(
     favoriteIds = favoriteIds.filter((id) => id !== listingId);
 
     const user = await prisma.user.update({
-      where: {
-        id: currentUser.id
-      },
-      data: {
-        favoriteIds
-      }
+      where: { id: currentUser.id },
+      data: { favoriteIds }
     });
 
     return NextResponse.json(user);
-  } catch (error) {
-    console.error("Failed to remove favorite:", error);
-    return NextResponse.error();
+  } catch (error: any) {
+    console.error("Failed to remove favorite:", error.message, error);
+    return NextResponse.json({ error: 'Failed to update favorites' }, { status: 500 });
   }
 }
+

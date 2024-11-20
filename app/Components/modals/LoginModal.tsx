@@ -41,7 +41,6 @@ const LoginModal = () => {
      signIn('credentials',{
       ...data,
       redirect:false,
-
      })
      .then((callback)=>{
       setIsLoading(false);
@@ -51,6 +50,7 @@ const LoginModal = () => {
         loginmodal.onClose();
       }
       if(callback?.error){
+        console.log("error ")
         toast.error(callback.error);
       }
      })
@@ -60,7 +60,6 @@ const LoginModal = () => {
  const toggle=useCallback(()=>{
  loginmodal.onClose();
  registermodal.onOpen();
- console.log("button clicked")
  },[loginmodal,registermodal])
 
 

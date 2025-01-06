@@ -11,7 +11,6 @@ import { Reservation } from "@prisma/client";
 
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { BiCategory } from "react-icons/bi";
 import toast from "react-hot-toast";
 import ListingReservation from "@/app/Components/listings/ListingReservation";
 import { Range } from "react-date-range";
